@@ -19,7 +19,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/beneficiary', beneficiaryRoutes);
 app.use('/api/user', userRoutes);  
 
-const PORT = 3400;
+const PORT = 3000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
