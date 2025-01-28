@@ -19,9 +19,17 @@ app.use('/api/auth', authRoutes);
 app.use('/api/beneficiary', beneficiaryRoutes);
 app.use('/api/user', userRoutes);  
 
+app.get("/", (req, res)=>{
+  res.send("Welcome to the Beneficiary Management System");
+})
 const PORT = 3000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  connectDB();
-});
+export default async (req, res) => {
+  try {
+    await connectDB();
+    app(req, res);
+  } catch (error) {
+    console.error('Database connection failed:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
