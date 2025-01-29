@@ -22,7 +22,7 @@ app.use('/api/user', userRoutes);
 app.get("/", (req, res)=>{
   res.send("Welcome to the Beneficiary Management System");
 })
-const PORT = 3000;
+const PORT = 2000;
 
 export default async (req, res) => {
   try {
@@ -33,3 +33,4 @@ export default async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+

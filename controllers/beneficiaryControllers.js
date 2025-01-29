@@ -6,7 +6,7 @@ const registerBeneficiary = async (req, res) => {
     req.body;
   try {
     const token = `TOKEN-${Date.now()}`;
- 
+
     const newBeneficiary = await Beneficiary.create({
       cnic,
       name,
@@ -26,7 +26,6 @@ const registerBeneficiary = async (req, res) => {
       token,
       qrCode: qrCodeDataUrl, // Include the QR code in the response
     });
-  
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Error registering beneficiary", error });
@@ -47,26 +46,16 @@ const getBeneficiaryByToken = async (req, res) => {
   }
 };
 
-
-
 const updateBeneficiaryStatus = async (req, res) => {
-  const { token, status } = req.body;
+  const { id, status } = req.body;
   try {
     const updatedBeneficiary = await Beneficiary.findOneAndUpdate(
-      { token },
-      {
-        status,
-        $push: {
-          history: {
-            timestamp: new Date(),
-            action: `Status updated to ${status}`,
-          },
-        },
-      },
+      { _id: id },
+      { status },
       { new: true }
     );
     if (!updatedBeneficiary)
-      return res.status(404).json({ message: "Token not found" });
+      return res.status(404).json({ message: "user not found" });
     res.json({
       message: "Status updated successfully",
       beneficiary: updatedBeneficiary,
@@ -156,5 +145,5 @@ export {
   getAllBeneficiaries,
   deleteBeneficiary,
   updateBeneficiaryInfo,
-  getBeneficiaryByToken
+  getBeneficiaryByToken,
 };
