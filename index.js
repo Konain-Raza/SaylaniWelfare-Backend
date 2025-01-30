@@ -24,7 +24,7 @@ app.get("/", (req, res)=>{
 })
 const PORT = 2000;
 
-export default async (req, res) => {
+z
   try {
     await connectDB();
     app(req, res);

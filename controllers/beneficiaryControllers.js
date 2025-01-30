@@ -18,13 +18,15 @@ const registerBeneficiary = async (req, res) => {
       remarks,
       token,
     });
+    const beneficiaries = await Beneficiary.find();
     const qrCodeDataUrl = await QRCode.toDataURL(token);
 
     res.status(201).json({
       message: "Beneficiary registered successfully",
       beneficiary: newBeneficiary,
+      beneficiaries,
       token,
-      qrCode: qrCodeDataUrl, // Include the QR code in the response
+      qrCode: qrCodeDataUrl,
     });
   } catch (error) {
     console.log(error);
