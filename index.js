@@ -24,7 +24,7 @@ app.get("/", (req, res)=>{
 })
 const PORT = 2000;
 
-z
+export default async (req, res) => {
   try {
     await connectDB();
     app(req, res);
@@ -33,4 +33,15 @@ z
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
+//for testing on local
+// app.listen(PORT, async() => {
+//   try {
+//     await connectDB();
+//     // app(req, res);
+//   } catch (error) {
+//     console.error('Database connection failed:', error.message);
+//     // res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// });
 
